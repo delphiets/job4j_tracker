@@ -10,8 +10,8 @@ public class PointTest {
 
     @Test
     public void distance() {
-        Point one = new Point(2,0,0);
-        Point tho = new Point(0,0,2);
+        Point one = new Point(2, 0, 0);
+        Point tho = new Point(0, 0, 2);
         double sum =  one.distance3d(tho);
         double result = 2.8284271247461903;
         assertThat(result, is(sum));

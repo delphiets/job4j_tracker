@@ -47,7 +47,7 @@ public class Triangle {
         double p = period(a, b, c);
         if (this.exist(a, b, c)) {
              // написать формулу для расчета площади треугольника.
-            rsl = p *(p - a) * (p - b) * (p - c);
+            rsl = p * (p - a) * (p - b) * (p - c);
         }
         return rsl;
     }
