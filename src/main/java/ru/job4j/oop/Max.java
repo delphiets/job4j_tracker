@@ -7,11 +7,9 @@ public class Max {
     }
 
     public static int max(int left, int right, int center) {
-        int result = max(left,right) >= center? max(left,right): center;
-        return result;
+        return Math.max(max(left,right),center);
     }
     public static int max(int left, int right, int center, int middle) {
-        int result = max(left,right,center) >= middle? max(left,right,center): middle;
-        return result;
+        return Math.max(max(left,right,center),middle);
     }
 }
