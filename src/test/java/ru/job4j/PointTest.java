@@ -4,6 +4,7 @@ import org.junit.Test;
 import ru.job4j.oop.Point;
 
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class PointTest {
@@ -13,8 +14,8 @@ public class PointTest {
         Point one = new Point(2, 0, 0);
         Point tho = new Point(0, 0, 2);
         double sum =  one.distance3d(tho);
-        double result = 2.8284271247461903;
-        assertThat(result, is(sum));
+        double result = 2.83;
+        assertEquals(result, sum, 01);
 
     }
 }
