@@ -11,7 +11,7 @@ public class ReportUsage {
         System.out.println(textSecond);
 
         JSONReport jsonReport = new JSONReport();
-        String textThird = jsonReport.generate("name \n", "body");
+        String textThird = jsonReport.generate("name, \n", "body\n}");
         System.out.println(textThird);
     }
     }
