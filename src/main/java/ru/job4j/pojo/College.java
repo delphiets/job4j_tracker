@@ -8,7 +8,7 @@ public class College {
         student.setName("Ivan");
         student.setSurname("Ivanov");
         student.setGroup(11);
-        student.getDate(new Date());
-        System.out.println("Student\nName: " + student.getName() + "\nSurname: " + student.getSurname() + "\nGroup: " + student.getGroup());
+        student.setDate("11.08.2007");
+        System.out.println("Student\nName: " + student.getName() + "\nSurname: " + student.getSurname() + "\nGroup: " + student.getGroup() + "\nDate: " + student.getDate());
     }
 }
