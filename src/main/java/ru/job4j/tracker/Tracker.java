@@ -43,16 +43,26 @@ public class Tracker {
         items = Arrays.copyOf(items, count);
         return items;
     }
-
-    public Item findById(String id) {
-        Item rsl = null;
+    private int indexOf(String id) {
+        int rsl = -1;
         for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId().equals(id)) {
-                rsl = item;
+            if (items[index].getId().equals(id)) {
+                rsl = index;
                 break;
             }
         }
         return rsl;
+    }
+
+    public Item findById(String id) {
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    public Item replace(String id, Item item) {
+        int index = indexOf(id);
+        String a = item.getName();
+        items[index].setName(a);
+        return items[index];
     }
 }
