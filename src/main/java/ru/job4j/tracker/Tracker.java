@@ -26,8 +26,7 @@ public class Tracker {
         for (int index = 0; index < size; index++) {
             items[index] = this.items[index];
         }
-        items = Arrays.copyOf(items, size);
-        return items;
+        return Arrays.copyOf(items, size);
     }
 
     public Item[] findByName(String key) {
@@ -40,9 +39,9 @@ public class Tracker {
                 count++;
             }
         }
-        items = Arrays.copyOf(items, count);
-        return items;
+        return Arrays.copyOf(items, count);
     }
+
     private int indexOf(String id) {
         int rsl = -1;
         for (int index = 0; index < size; index++) {
@@ -59,10 +58,30 @@ public class Tracker {
         return index != -1 ? items[index] : null;
     }
 
-    public Item replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
+        int index = indexOf(id); // берет индекс ячейки
+        if (index != -1) { // проверяет что index не -1
+         String nameItem = item.getName(); // берем имя заявки
+         items[index].setName(nameItem); // заменяем имя заявки
+         item.setId(id); // присваиваем старое айди
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean delete(String id) {
+        boolean result = false;
         int index = indexOf(id);
-        String a = item.getName();
-        items[index].setName(a);
-        return items[index];
+
+        if (index != -1) {
+            int start = index + 1;
+            int count = size - index;
+            System.arraycopy(items, start, items, index, count);
+            items[size - 1] = null;
+            size--;
+            result = true;
+        }
+        return result;
     }
 }
