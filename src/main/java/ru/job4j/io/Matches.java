@@ -8,6 +8,7 @@ public class Matches {
 
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static int sum = 11;
+    private static boolean step  = true;
 
     public static int gamer(int count) throws IOException {
         boolean game = true;
@@ -37,25 +38,28 @@ public class Matches {
             if (number == 1) {
                 while (game) {
                     if (sum > 0) {
-                        System.out.println("Ход первого игрока. \nОсталось: " + sum + " из 11 спичек");
-                        int count = Integer.parseInt(reader.readLine());
-                        Matches.gamer(count);
+                        if (step) {
+                            System.out.println("Ход первого игрока. \nОсталось: " + sum + " из 11 спичек");
+                            int count = Integer.parseInt(reader.readLine());
+                            Matches.gamer(count);
+                            step = false;
+                        } else {
+                            System.out.println("Ход второго игрока.\nОсталось: " + sum + " из 11 спичек");
+                            int count = Integer.parseInt(reader.readLine());
+                            Matches.gamer(count);
+                            step = true;
+                        }
+                    } else if (step) {
+                        System.out.println("Выиграл второй игрок");
+                        game = false;
+                        break;
                     } else {
-                        System.out.println("Выйграл второй игрок");
+                        System.out.println("Выиграл первый игрок");
                         game = false;
                         break;
                     }
-
-                    if (sum > 0) {
-                        System.out.println("Ход второго игрока.\nОсталось: " + sum + " из 11 спичек");
-                        int count = Integer.parseInt(reader.readLine());
-                    Matches.gamer(count);
-                    } else {
-                        System.out.println("Выйграл первый игрок");
-                        game = false;
-                    }
-
                 }
+
             } else if (number == 2) {
                 System.out.println("Игра завершена.");
                 game = false;
