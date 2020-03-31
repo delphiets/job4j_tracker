@@ -4,48 +4,72 @@ import java.io.IOException;
 
 public class StartUI {
 
+    public static void createItem(Input input, Tracker tracker) throws IOException {
+        String name = input.askStr("=== Create a new Item ====" + "\nEnter name: ");
+        Item item = new Item(name);
+        tracker.add(item);
+    }
+
+    public static void findAllItem(Tracker tracker) {
+        for (int index = 0; index < tracker.findAll().length; index++) {
+            System.out.println(tracker.findAll()[index].toString());
+        }
+    }
+
+    public static void replaceItem(Input input, Tracker tracker) throws IOException {
+        String id = input.askStr("Введите id: ");
+        String name = input.askStr("Введите новое название: ");
+        if (tracker.replace(id, new Item(name))) {
+            System.out.println("Замена произведена успешно");
+        } else {
+            System.out.println("Ошибка. Id заявки не найден");
+        }
+    }
+
+    public static void deleteItem(Input input, Tracker tracker) throws IOException {
+        String id = input.askStr("Введите id для удаления: ");
+        if (tracker.delete(id)) {
+            System.out.println("Заявка удалена успешно");
+        } else {
+            System.out.println("Ошибка. Id заявки не найден");
+        }
+    }
+
+    public static void findByIdItem(Input input, Tracker tracker) throws IOException {
+        String id = input.askStr("Введите id для поиска товара: ");
+        if (tracker.findById(id) != null) {
+            System.out.println(new Item(id).getName());
+        } else {
+            System.out.println("Ошибка. Id заявки не найден");
+        }
+    }
+
+    public static void findByNameItem(Input input, Tracker tracker) throws IOException {
+        String name = input.askStr("Введите имя: ");
+        if (tracker.findByName(name) != null) {
+            System.out.println(new Item(name).getName());
+        } else {
+            System.out.println("Ошибка. Id заявки не найден");
+        }
+    }
+
     public void init(Input input, Tracker tracker) throws IOException {
         boolean run = true;
         while (run) {
             this.showMenu();
             int select = input.askInt("Select: ");
             if (select == 0) {
-                String name = input.askStr("=== Create a new Item ====" + "\nEnter name: ");
-                Item item = new Item(name);
-                tracker.add(item);
+                StartUI.createItem(input, tracker);
             } else if (select == 1) {
-                for (int index = 0; index < tracker.findAll().length; index++) {
-                    System.out.println(tracker.findAll()[index].toString());
-                }
+                StartUI.findAllItem(tracker);
             } else if (select == 2) {
-                String id = input.askStr("Введите id: ");
-                String name = input.askStr("Введите новое название: ");
-                if (tracker.replace(id, new Item(name))) {
-                    System.out.println("Замена произведена успешно");
-                } else {
-                    System.out.println("Ошибка. Id заявки не найден");
-                }
+                StartUI.replaceItem(input, tracker);
             } else if (select == 3) {
-                String id = input.askStr("Введите id для удаления: ");
-                if (tracker.delete(id)) {
-                    System.out.println("Заявка удалена успешно");
-                } else {
-                    System.out.println("Ошибка. Id заявки не найден");
-                }
+                StartUI.deleteItem(input, tracker);
             } else if (select == 4) {
-                String id = input.askStr("Введите id для поиска товара: ");
-                if (tracker.findById(id) != null) {
-                    System.out.println(new Item(id).getName());
-                } else {
-                    System.out.println("Ошибка. Id заявки не найден");
-                }
+                StartUI.findByIdItem(input, tracker);
             } else if (select == 5) {
-                String name = input.askStr("Введите имя: ");
-                if (tracker.findByName(name) != null) {
-                    System.out.println(new Item(name).getName());
-                } else {
-                    System.out.println("Ошибка. Id заявки не найден");
-                }
+                StartUI.findByNameItem(input, tracker);
             } else if (select == 6) {
                 run = false;
             }
