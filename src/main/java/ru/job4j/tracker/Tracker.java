@@ -21,7 +21,6 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-
         return Arrays.copyOf(items, size);
     }
 
@@ -56,11 +55,10 @@ public class Tracker {
 
     public boolean replace(String id, Item item) {
         boolean result = false;
-        int index = indexOf(id); // берет индекс ячейки
-        if (index != -1) { // проверяет что index не -1
-         String nameItem = item.getName(); // берем имя заявки
-         items[index].setName(nameItem); // заменяем имя заявки
-         item.setId(id); // присваиваем старое айди
+        int index = indexOf(id);
+        if (index != -1) {
+            items[index] = item;
+            item.setId(id);
             result = true;
         }
         return result;
