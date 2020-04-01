@@ -30,7 +30,7 @@ public class Tracker {
         for (int index = 0; index < size; index++) {
             Item item = this.items[index];
             if (item.getName().equals(key)) {
-                items[0] = this.items[index];
+                items[count] = this.items[index];
                 count++;
             }
         }

@@ -11,46 +11,51 @@ public class StartUI {
     }
 
     public static void findAllItem(Tracker tracker) {
-        for (int index = 0; index < tracker.findAll().length; index++) {
-            System.out.println(tracker.findAll()[index].toString());
+        Item[] item = tracker.findAll();
+        for (int index = 0; index < item.length; index++) {
+            System.out.println(item[index]);
         }
     }
 
     public static void replaceItem(Input input, Tracker tracker) throws IOException {
-        String id = input.askStr("Введите id: ");
-        String name = input.askStr("Введите новое название: ");
+        String id = input.askStr("=== Create a new Item ====" + "\nEnter id: ");
+        String name = input.askStr("Enter new name: ");
         if (tracker.replace(id, new Item(name))) {
-            System.out.println("Замена произведена успешно");
+            System.out.println("Successful replacement");
         } else {
-            System.out.println("Ошибка. Id заявки не найден");
+            System.out.println("Error. Id not found");
         }
     }
 
     public static void deleteItem(Input input, Tracker tracker) throws IOException {
-        String id = input.askStr("Введите id для удаления: ");
+        String id = input.askStr("=== Create a new Item ====" + "\nEnter id to delete: ");
         if (tracker.delete(id)) {
-            System.out.println("Заявка удалена успешно");
+            System.out.println("Application deleted successfully");
         } else {
-            System.out.println("Ошибка. Id заявки не найден");
+            System.out.println("Error. Id not found");
         }
     }
 
     public static void findByIdItem(Input input, Tracker tracker) throws IOException {
-        String id = input.askStr("Введите id для поиска товара: ");
-        if (tracker.findById(id) != null) {
-            System.out.println(new Item(id).getName());
-        } else {
-            System.out.println("Ошибка. Id заявки не найден");
+        String id = input.askStr("=== Create a new Item ====" + "\nEnter id to search for goods: ");
+            if (tracker.findById(id).getId().equals(id)) {
+                System.out.println(id);
+            } else {
+                System.out.println("Error. Id not found");
+            }
         }
-    }
 
     public static void findByNameItem(Input input, Tracker tracker) throws IOException {
-        String name = input.askStr("Введите имя: ");
-        if (tracker.findByName(name) != null) {
-            System.out.println(new Item(name).getName());
-        } else {
-            System.out.println("Ошибка. Id заявки не найден");
+        String name = input.askStr("=== Create a new Item ====" + "\nEnter name: ");
+        Item[] itemName = tracker.findByName(name);
+        for (int index = 0; index < itemName.length; index++) {
+            if (itemName[index].getName().equals(name)) {
+                System.out.println(itemName[index]);
+            } else {
+                System.out.println("Error. Id not found");
+            }
         }
+
     }
 
     public void init(Input input, Tracker tracker) throws IOException {
