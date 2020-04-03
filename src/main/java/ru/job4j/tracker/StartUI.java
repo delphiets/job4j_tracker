@@ -43,10 +43,6 @@ public class StartUI {
                 System.out.println(item.getName());
             } else {
                 System.out.println("Error. Id not found");
-                /*
-                if (tracker.findById(id).getId().equals(id)) {
-                System.out.println(tracker.findById(id).getName());
-                 */
             }
         }
 
