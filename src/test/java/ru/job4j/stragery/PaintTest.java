@@ -10,9 +10,9 @@ import java.util.StringJoiner;
 public class PaintTest {
     @Test
     public void whenDrawSquare() {
-        // получаем ссылку на стандартный вывод в консоль.
+        // Тут выходит мы ссылке stdout присваиваем System.out ?
         PrintStream stdout = System.out;
-        // Создаем буфур для хранения вывода.
+        // тут все понятно
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         //Заменяем стандартный вывод на вывод в пямять для тестирования.
         System.setOut(new PrintStream(out));
@@ -25,31 +25,51 @@ public class PaintTest {
                                 .add("***     ***")
                                 .add("***********")
                                 .add("***********")
-                                .add(System.lineSeparator())
                                 .toString()));
         // возвращаем обратно стандартный вывод в консоль.
         System.setOut(stdout);
     }
     @Test
     public void whenDrawTriangle() {
-        // получаем ссылку на стандартный вывод в консоль.
+        /**
+         * 1) Тут выходит мы ссылке stdout присваиваем System.out ?
+         */
         PrintStream stdout = System.out;
-        // Создаем буфур для хранения вывода.
+
+        /**
+         * 2) создаем массив байт как я понял?
+         */
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        //Заменяем стандартный вывод на вывод в пямять для тестирования.
+
+        /**
+         * 3) тут мы массив байт передаем в конструктор класса PrintStream ?
+         * Мне не понятно как работает метод System.setOut принимает он обьект PrintStream(out) и что происходит? Что делат System.setOut ?
+         */
         System.setOut(new PrintStream(out));
-        // выполняем действия пишушиее в консоль.
+
+        /**
+         * 4) тут мы создали обьект Paint() и в его метод передали new Triangle()
+         * но дальше я не вижу где мы его используем, это мне тоже не понятно
+         */
         new Paint().draw(new Triangle());
-        // проверяем результат вычисления
+
+
+        /**
+         * 5) тут если я правильно понял мы создали обьект String но не понятно что мы передали в его конструктор? И что он делает с out.toByteArray()?
+         * 6) я так понял мы создаем новый StringJoiner? с треугольником? И сравниваем его с new String(out.toByteArray() нашим выводом информации.
+         * Но так и не понятно как наша информация с консоли попала сюда new String(out.toByteArray()) ведь как я вижу не передали обьект Paint() сюда
+         */
         assertThat(new String(out.toByteArray()), is(new StringJoiner(System.lineSeparator())
                         .add("     *")
                         .add("    ***")
                         .add("   *****")
                         .add("  *******")
                         .add(" *********")
-                .add(System.lineSeparator())
                 .toString()));
-        // возвращаем обратно стандартный вывод в консоль.
+
+        /**
+         * 7) не совсем понятно зачем обратно возвращать стандартный вывод в консоль.
+         */
         System.setOut(stdout);
     }
 }

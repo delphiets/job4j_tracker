@@ -10,7 +10,7 @@ public class Triangle implements Shape {
         triangle.add("    ***");
         triangle.add("   *****");
         triangle.add("  *******");
-        triangle.add(" *********" + System.lineSeparator());
+        triangle.add(" *********");
         return triangle.toString();
     }
 }

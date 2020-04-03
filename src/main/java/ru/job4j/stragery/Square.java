@@ -10,7 +10,7 @@ public class Square implements Shape {
         square.add("***     ***");
         square.add("***     ***");
         square.add("***********");
-        square.add("***********" + System.lineSeparator());
+        square.add("***********");
             return square.toString();
         }
 }

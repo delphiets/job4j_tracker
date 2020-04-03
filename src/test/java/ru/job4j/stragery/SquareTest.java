@@ -14,7 +14,7 @@ public class SquareTest {
                         .add("***     ***")
                         .add("***     ***")
                         .add("***********")
-                        .add("***********" + System.lineSeparator())
+                        .add("***********")
                         .toString()));
     }
 }
