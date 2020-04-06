@@ -12,8 +12,8 @@ public class FindByIdAction implements UserAction {
     public boolean execute(Input input, Tracker tracker) throws IOException {
         String id = input.askStr("=== Create a new Item ====" + System.lineSeparator() + "Enter id to search for goods: ");
         Item item = tracker.findById(id);
-        if (item.getId().equals(id)) {
-            System.out.println(item.getName());
+        if (item != null) {
+            System.out.println("Id: " + item);
         } else {
             System.out.println("Error. Id not found");
         }

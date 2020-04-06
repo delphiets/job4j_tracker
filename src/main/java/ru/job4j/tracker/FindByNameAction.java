@@ -11,13 +11,13 @@ public class FindByNameAction implements UserAction {
     @Override
     public boolean execute(Input input, Tracker tracker) throws IOException {
         String name = input.askStr("=== Create a new Item ====" + System.lineSeparator() + "Enter name: ");
-        Item[] itemName = tracker.findByName(name);
-        for (int index = 0; index < itemName.length; index++) {
-            if (itemName[index].getName().equals(name)) {
-                System.out.println(itemName[index]);
-            } else {
-                System.out.println("Error. Id not found");
-            }
+        Item[] items = tracker.findByName(name);
+        if (items.length != 0) {
+            for (Item item: items) {
+                System.out.println("Name: " + item);
+        }
+        } else {
+            System.out.println("Name not found");
         }
         return true;
     }
