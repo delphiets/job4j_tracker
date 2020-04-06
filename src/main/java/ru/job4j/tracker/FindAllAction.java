@@ -12,7 +12,7 @@ public class FindAllAction implements UserAction {
     public boolean execute(Input input, Tracker tracker) throws IOException {
         Item[] items = tracker.findAll();
         if (items.length != 0) {
-            for (Item item: tracker.findAll()) {
+            for (Item item: items) {
                 System.out.println("Name: " + item.getName() + " | Id: " + item.getId());
             }
         } else {
