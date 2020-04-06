@@ -10,9 +10,8 @@ public class FindAllAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) throws IOException {
-        Item[] item = tracker.findAll();
-        for (int index = 0; index < item.length; index++) {
-            System.out.println(item[index]);
+        for (Item item: tracker.findAll()) {
+                System.out.println("Name: " + item.getName() + " | Id: " + item.getId());
         }
         return true;
     }
