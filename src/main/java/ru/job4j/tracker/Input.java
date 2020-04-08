@@ -6,4 +6,6 @@ public interface Input {
     String askStr(String question) throws IOException;
 
     int askInt(String question) throws IOException;
+
+    int askInt(String question, int max) throws IOException;
 }
