@@ -15,9 +15,20 @@ public class ValidateInputTest {
         System.setOut(new PrintStream(mem));
         String[] data = {"one", "1"};
         ValidateInput input = new ValidateStubInput(data);
-        input.askInt("Enter");
-        assertThat(mem, is(String.format("Please enter validate data again.%n")));
+        input.askInt("");
+        assertThat(mem.toString(), is(String.format("Please enter validate data again.%n")));
         System.setOut(out);
     }
 
+    @Test
+    public void whenMaxInput() {
+        ByteArrayOutputStream mem = new ByteArrayOutputStream();
+        PrintStream out = System.out;
+        System.setOut(new PrintStream(mem));
+        String[] data = {"7", "0"};
+        ValidateInput input = new ValidateStubInput(data);
+        input.askInt("", 7);
+        assertThat(mem.toString(), is(String.format("Please select key from menu.%n")));
+        System.setOut(out);
+    }
 }

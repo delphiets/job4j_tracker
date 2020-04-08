@@ -16,7 +16,7 @@ public class ConsoleInput implements Input {
     @Override
     public int askInt(String question) throws IOException {
         System.out.print(question);
-        return Integer.parseInt(reader.readLine());
+        return Integer.parseInt(askStr(question));
     }
 
     @Override
