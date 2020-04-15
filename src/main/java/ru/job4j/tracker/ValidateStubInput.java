@@ -12,4 +12,9 @@ public class ValidateStubInput extends ValidateInput {
     public String askStr(String question) {
         return data[position++];
     }
+
+    @Override
+    public int askInt(String question) {
+        return Integer.parseInt(askStr(question));
+    }
 }
