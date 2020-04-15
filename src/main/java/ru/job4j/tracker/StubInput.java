@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
-public class StubInput implements Input {
+import java.io.IOException;
+
+public class StubInput extends ConsoleInput implements Input {
     private String[] answers;
     private int position = 0;
 
@@ -19,7 +21,7 @@ public class StubInput implements Input {
     }
 
     @Override
-    public int askInt(String question, int max) {
-        return askInt(question);
+    public int askInt(String question, int max) throws IOException {
+        return super.askInt(question, max);
     }
 }

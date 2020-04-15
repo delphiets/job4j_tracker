@@ -2,17 +2,27 @@ package ru.job4j.tracker;
 
 import java.io.IOException;
 
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
+    private final Input input;
+
+    public ValidateInput(Input input) {
+        this.input = input;
+    }
 
     @Override
-    public int askInt(String question) {
+    public String askStr(String question) throws IOException {
+        return input.askStr(question);
+    }
+
+    @Override
+    public int askInt(String question) throws IOException {
         boolean invalid = true;
         int value = -1;
         do {
             try {
-                value = super.askInt(question);
+                value = input.askInt(question);
                 invalid = false;
-            } catch (NumberFormatException | IOException nfe) {
+            } catch (NumberFormatException nfe) {
                 System.out.println("Please enter validate data again.");
             }
         } while (invalid);
@@ -20,23 +30,19 @@ public class ValidateInput extends ConsoleInput {
     }
 
     @Override
-    public int askInt(String question, int max) {
+    public int askInt(String question, int max) throws IOException {
         boolean invalid = true;
         int value = -1;
         do {
             try {
-                value = super.askInt(question, max);
+                value = input.askInt(question, max);
                 invalid = false;
             } catch (IllegalStateException moe) {
                 System.out.println("Please select key from menu.");
             } catch (NumberFormatException nfe) {
                 System.out.println("Please enter validate data again.");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         } while (invalid);
         return value;
     }
 }
-
-
