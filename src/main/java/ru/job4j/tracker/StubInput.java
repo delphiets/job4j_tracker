@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import java.io.IOException;
 
-public class StubInput extends ConsoleInput implements Input {
+public class StubInput implements Input {
     private String[] answers;
     private int position = 0;
 
@@ -21,7 +21,11 @@ public class StubInput extends ConsoleInput implements Input {
     }
 
     @Override
-    public int askInt(String question, int max) throws IOException {
-        return super.askInt(question, max);
+    public int askInt(String question, int max) {
+        int select = askInt(question);
+        if (select < 0 || select >= max) {
+            throw new IllegalStateException(String.format("Out of about %s > [0, %s]", select, max));
+        }
+        return select;
     }
 }
