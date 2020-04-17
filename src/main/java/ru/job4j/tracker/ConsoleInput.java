@@ -9,7 +9,6 @@ public class ConsoleInput implements Input {
 
     @Override
     public String askStr(String question) throws IOException {
-        System.out.print(question);
         return reader.readLine();
     }
 
