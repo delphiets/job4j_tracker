@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FindByNameAction implements UserAction {
     @Override
@@ -11,8 +12,8 @@ public class FindByNameAction implements UserAction {
     @Override
     public boolean execute(Input input, Tracker tracker) throws IOException {
         String name = input.askStr("=== Create a new Item ====" + System.lineSeparator() + "Enter name: ");
-        Item[] items = tracker.findByName(name);
-        if (items.length != 0) {
+        ArrayList<Item> items = tracker.findByName(name);
+        if (items.size() != 0) {
             for (Item item: items) {
                 System.out.println("Name: " + item);
         }

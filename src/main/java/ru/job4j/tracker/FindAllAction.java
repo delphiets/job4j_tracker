@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.io.IOException;
+
+import java.util.ArrayList;
 
 public class FindAllAction implements UserAction {
     @Override
@@ -9,9 +10,9 @@ public class FindAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) throws IOException {
-        Item[] items = tracker.findAll();
-        if (items.length != 0) {
+    public boolean execute(Input input, Tracker tracker) {
+        ArrayList<Item> items = tracker.findAll();
+        if (items.size() != 0) {
             for (Item item: items) {
                 System.out.println("Name: " + item.getName() + " | Id: " + item.getId());
             }

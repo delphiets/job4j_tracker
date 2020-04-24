@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
@@ -16,7 +18,9 @@ public class StartUITest {
     public void whenExit() throws IOException {
         StubInput input = new StubInput(new String[] {"0"});
         StubAction action = new StubAction();
-        new StartUI().init(input, new Tracker(), new UserAction[] {action });
+        ArrayList<UserAction> array = new ArrayList<>();
+        array.add(action);
+        new StartUI().init(input, new Tracker(), array);
         assertThat(action.isCall(), is(true));
     }
 
@@ -27,7 +31,9 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         StubInput input = new StubInput(new String[] {"0"});
         StubAction action = new StubAction();
-        new StartUI().init(input, new Tracker(), new UserAction[] {action });
+        ArrayList<UserAction> array = new ArrayList<>();
+        array.add(action);
+        new StartUI().init(input, new Tracker(), array);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(System.lineSeparator() + "Menu.")
                 .add("0. Stub action")

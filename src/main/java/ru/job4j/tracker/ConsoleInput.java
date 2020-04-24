@@ -9,12 +9,12 @@ public class ConsoleInput implements Input {
 
     @Override
     public String askStr(String question) throws IOException {
+        System.out.print(question);
         return reader.readLine();
     }
 
     @Override
     public int askInt(String question) throws IOException {
-        System.out.print(question);
         return Integer.parseInt(askStr(question));
     }
 

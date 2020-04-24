@@ -4,6 +4,8 @@ import org.junit.Test;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -24,8 +26,8 @@ public class TrackerTest {
         Item itemFirst = new Item("test2");
         tracker.add(item);
         tracker.add(itemFirst);
-        Item[] result = tracker.findByName(itemFirst.getName());
-        assertThat(result[0].getName(), is(itemFirst.getName()));
+        ArrayList<Item> result = tracker.findByName(itemFirst.getName());
+        assertThat(result.get(0).getName(), is(itemFirst.getName()));
     }
     @Test
     public void whenAddNewItemThenTrackerHasSameItemTwo() {
@@ -40,7 +42,7 @@ public class TrackerTest {
         tracker.add(itemSecond);
         tracker.add(itemThird);
         tracker.add(itemFourth);
-        Item[] result = tracker.findAll();
+        ArrayList<Item> result = tracker.findAll();
         assertThat(result, is(tracker.findAll()));
     }
 
