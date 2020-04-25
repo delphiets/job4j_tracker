@@ -3,8 +3,10 @@ package ru.job4j.tracker;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class Tracker {
-    private final ArrayList<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
 
     public Item add(Item item) {
@@ -17,12 +19,12 @@ public class Tracker {
         return String.valueOf(ids++);
     }
 
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return items;
     }
 
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> items = new ArrayList<>();
+    public List<Item> findByName(String key) {
+        List<Item> items = new ArrayList<>();
         for (int index = 0; index < this.items.size(); index++) {
             Item item = this.items.get(index);
             if (item.getName().equals(key)) {
@@ -63,7 +65,6 @@ public class Tracker {
     public boolean delete(String id) {
         boolean result = false;
         int index = indexOf(id);
-
         if (index != -1) {
            items.remove(index);
             result = true;

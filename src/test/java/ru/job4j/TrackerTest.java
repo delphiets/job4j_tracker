@@ -5,6 +5,7 @@ import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -26,7 +27,7 @@ public class TrackerTest {
         Item itemFirst = new Item("test2");
         tracker.add(item);
         tracker.add(itemFirst);
-        ArrayList<Item> result = tracker.findByName(itemFirst.getName());
+        List<Item> result = tracker.findByName(itemFirst.getName());
         assertThat(result.get(0).getName(), is(itemFirst.getName()));
     }
     @Test
@@ -42,7 +43,7 @@ public class TrackerTest {
         tracker.add(itemSecond);
         tracker.add(itemThird);
         tracker.add(itemFourth);
-        ArrayList<Item> result = tracker.findAll();
+        List<Item> result = tracker.findAll();
         assertThat(result, is(tracker.findAll()));
     }
 

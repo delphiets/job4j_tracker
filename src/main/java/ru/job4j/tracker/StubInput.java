@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import java.io.IOException;
 
 public class StubInput implements Input {
     private String[] answers;
