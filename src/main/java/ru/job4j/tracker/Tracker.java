@@ -28,7 +28,7 @@ public class Tracker {
         for (int index = 0; index < this.items.size(); index++) {
             Item item = this.items.get(index);
             if (item.getName().equals(key)) {
-                items.add(this.items.get(index));
+                items.add(item);
             }
         }
         return items;
@@ -54,8 +54,7 @@ public class Tracker {
         boolean result = false;
         int index = indexOf(id);
         if (index != -1) {
-            items.add(index, item);
-            items.remove(++index);
+            items.set(index, item);
             item.setId(id);
             result = true;
         }
