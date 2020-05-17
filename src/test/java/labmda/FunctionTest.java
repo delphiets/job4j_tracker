@@ -17,4 +17,16 @@ public class FunctionTest {
         assertThat(result, is(expected));
     }
 
+    @Test
+    public void whenQuadraticFunctionThenQuadraticResults() {
+        List<Double> result = RangeCount.diapason(2, 6, x -> 3 * Math.pow(x, 2) + 4 * x + 1);
+        List<Double> expected = Arrays.asList(21D, 40D, 65D, 96D);
+        assertThat(result, is(expected));
+    }
+    @Test
+    public void w1henIndicativeFunctionThenIndicativeResults() {
+        List<Double> result = RangeCount.diapason(2, 4, x -> Math.pow(4, x));
+        List<Double> expected = Arrays.asList(16D, 64D);
+        assertThat(result, is(expected));
+    }
 }
