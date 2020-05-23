@@ -14,22 +14,22 @@ public class SchoolTest {
     @Test
     public void classA() {
         List<Student> students = List.of(new Student("Antonov", 100), new Student("Bogdan", 70), new Student("Pupkin", 30));
-        Predicate<Student> predicate = p -> p.getScore() > 70 && p.getScore() <= 100;
+        Predicate<Student> predicate = p -> p.getScore() >= 70 && p.getScore() <= 100;
         List<Student> list = new School().collect(students, predicate);
-        assertThat(list.toString(), is(List.of(new Student("Antonov", 100)).toString()));
+        assertThat(list, is(List.of(new Student("Antonov", 100), new Student("Bogdan", 70))));
     }
     @Test
     public void classB() {
-        List<Student> students = List.of(new Student("Antonov", 100), new Student("Bogdan", 70), new Student("Pupkin", 30));
-        Predicate<Student> predicate = p -> p.getScore() > 50 && p.getScore() <= 70;
+        List<Student> students = List.of(new Student("Antonov", 100), new Student("Bogdan", 50), new Student("Pupkin", 30));
+        Predicate<Student> predicate = p -> p.getScore() >= 50 && p.getScore() < 70;
         List<Student> list = new School().collect(students, predicate);
-        assertThat(list.toString(), is(List.of(new Student("Bogdan", 70)).toString()));
+        assertThat(list, is(List.of(new Student("Bogdan", 50))));
     }
     @Test
     public void classC() {
         List<Student> students = List.of(new Student("Antonov", 100), new Student("Bogdan", 70), new Student("Pupkin", 30));
-        Predicate<Student> predicate = p -> p.getScore() <= 50 && p.getScore() >= 0;
+        Predicate<Student> predicate = p -> p.getScore() >= 0 && p.getScore() < 50;
         List<Student> list = new School().collect(students, predicate);
-        assertThat(list.toString(), is(List.of(new Student("Pupkin", 30)).toString()));
+        assertThat(list, is(List.of(new Student("Pupkin", 30))));
     }
 }
