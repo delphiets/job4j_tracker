@@ -14,16 +14,8 @@ public class Profile {
         this.address = address;
     }
    public List<Address> collect(List<Profile> profiles) {
-       System.out.println(profiles);
        return profiles.stream().map(profile -> profile.address).collect(Collectors.toList());
    }
-
-    public static void main(String[] args) {
-        Profile profile = new Profile(new Address("Dnipro", "Grushevsky", 11, 108));
-        List<Profile> list = List.of(profile);
-        profile.collect(list);
-    }
-
     @Override
     public String toString() {
         return  address + "";
