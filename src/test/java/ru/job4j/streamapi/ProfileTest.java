@@ -16,4 +16,10 @@ public class ProfileTest {
         List<Address> addresses = new  ArrayList<>(List.of(new Address("Dnipro", "Grushevsky", 11, 108), new Address("Lviv", "Petrovsky", 1, 10)));
         assertThat(new Profiles().collect(list), is(addresses));
     }
+    @Test
+    public void consoleUniqueAddress() {
+        List<Profile> list = List.of(new Profile(new Address("Dnipro", "Grushevsky", 11, 108)), new Profile(new Address("Lviv", "Petrovsky", 1, 10)), new Profile(new Address("Dnipro", "Grushevsky", 11, 108)));
+        List<Address> addresses = new  ArrayList<>(List.of(new Address("Dnipro", "Grushevsky", 11, 108), new Address("Lviv", "Petrovsky", 1, 10)));
+        assertThat(new Profiles().collect(list), is(addresses));
+    }
 }

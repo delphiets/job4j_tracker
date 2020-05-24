@@ -14,6 +14,23 @@ public class Address {
         this.home = home;
         this.apartment = apartment;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getHome() {
+        return home;
+    }
+
+    public int getApartment() {
+        return apartment;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
