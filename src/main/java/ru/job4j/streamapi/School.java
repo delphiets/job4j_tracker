@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 
 public class School {
 
-
     public List<Student> collect(List<Student> students, Predicate<Student> predict) {
         return students.stream().filter(predict).collect(Collectors.toList());
     }
 
-    public Map<String, Student> collectMap(List<Student> students, Predicate<Student> predict) {
-        return students.stream().filter(predict).distinct().collect(Collectors.toMap(Student::getSurName, student -> student));
+    public Map<String, Student> collectMap(List<Student> students) {
+        return students.stream().distinct().collect(Collectors.toMap(Student::getSurName, student -> student, (a, b) -> new Student(a.getSurName(), b.getScore())));
     }
+
 }

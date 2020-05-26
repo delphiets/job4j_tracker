@@ -36,10 +36,9 @@ public class SchoolTest {
 
     @Test
     public void classes() {
-        List<Student> students = List.of(new Student("Antonov", 100), new Student("Bogdan", 70), new Student("Pupkin", 30), new Student("Pupkin", 30));
-        Predicate<Student> predicate = p -> p.getScore() >= 0 && p.getScore() < 50;
-        Map<String, Student> map = new School().collectMap(students, predicate);
-        Map<String, Student> list = Map.of("Pupkin",  new Student("Pupkin", 30));
+        List<Student> students = List.of(new Student("Pupkin", 30), new Student("Bogdan", 70), new Student("Pupkin", 80));
+        Map<String, Student> map = new School().collectMap(students);
+        Map<String, Student> list = Map.of("Bogdan", new Student("Bogdan", 70), "Pupkin",  new Student("Pupkin", 80));
         assertThat(map, is(list));
     }
 }
