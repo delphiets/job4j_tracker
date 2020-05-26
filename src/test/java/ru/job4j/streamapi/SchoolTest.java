@@ -38,7 +38,7 @@ public class SchoolTest {
     public void classes() {
         List<Student> students = List.of(new Student("Pupkin", 30), new Student("Bogdan", 70), new Student("Pupkin", 80));
         Map<String, Student> map = new School().collectMap(students);
-        Map<String, Student> list = Map.of("Bogdan", new Student("Bogdan", 70), "Pupkin",  new Student("Pupkin", 80));
+        Map<String, Student> list = Map.of("Pupkin",  new Student("Pupkin", 30), "Bogdan", new Student("Bogdan", 70));
         assertThat(map, is(list));
     }
 }
