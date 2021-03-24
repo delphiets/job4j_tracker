@@ -1,34 +1,39 @@
 package ru.job4j.tracker;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.sql.SQLException;
 
 public class StartUI {
 
-    public void init(Input input, Tracker tracker, List<UserAction> actions) throws IOException {
+    public void init(Input input, Store store, UserAction[] actions) throws IOException, SQLException {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
-            int select = input.askInt("Select: ", actions.size());
-            UserAction action = actions.get(select);
-            run = action.execute(input, tracker);
+            int select = input.askInt("Select: ", actions.length);
+            UserAction action = actions[select];
+            run = action.execute(input, store);
         }
     }
 
-    private void showMenu(List<UserAction> actions) {
+    private void showMenu(UserAction[] actions) {
         System.out.println(System.lineSeparator() + "Menu.");
-        for (int index = 0; index < actions.size(); index++) {
-            System.out.println(index + ". " + actions.get(index).name());
+        for (int index = 0; index < actions.length; index++) {
+            System.out.println(index + ". " + actions[index].name());
         }
     }
 
     public static void main(String[] args) throws IOException {
-        Input input = new ConsoleInput();
-        Input validate = new ValidateInput(input);
-        Tracker tracker = new Tracker();
-        List<UserAction> actions = new ArrayList<>(Arrays.asList(new CreateAction(), new FindAllAction(), new ReplaceAction(), new DeleteAction(), new FindByIdAction(), new FindByNameAction(), new ExitAction()));
-        new StartUI().init(validate, tracker, actions);
+        Input validate = new ValidateInput(
+                new ConsoleInput()
+        );
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            UserAction[] actions = {
+                    new CreateAction(), new ReplaceAction(), new DeleteAction(), new FindAllAction(), new FindByNameAction(), new FindByIdAction()
+            };
+            new StartUI().init(validate, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

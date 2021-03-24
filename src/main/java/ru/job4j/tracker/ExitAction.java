@@ -9,7 +9,7 @@ public class ExitAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) throws IOException {
+    public boolean execute(Input input, Store store) throws IOException {
         return false;
     }
 }

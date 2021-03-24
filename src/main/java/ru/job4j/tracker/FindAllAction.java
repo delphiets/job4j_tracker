@@ -9,8 +9,8 @@ public class FindAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
-        List<Item> items = tracker.findAll();
+    public boolean execute(Input input, Store store) {
+        List<Item> items = store.findAll();
         if (items.size() != 0) {
             for (Item item: items) {
                 System.out.println("Name: " + item.getName() + " | Id: " + item.getId());

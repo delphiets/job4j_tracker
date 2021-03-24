@@ -6,7 +6,7 @@
 
     <groupId>ru.job4j</groupId>
     <artifactId>tracker</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>3.0</version>
 
     <properties>
@@ -16,6 +16,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.12</version>
+        </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
