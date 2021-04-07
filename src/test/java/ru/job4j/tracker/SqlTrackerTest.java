@@ -4,7 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
+import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -12,79 +16,81 @@ import static org.junit.Assert.*;
 
 public class SqlTrackerTest {
 
-    private SqlTracker tracker;
-
     @Before
     public void before() {
         System.out.println("Before method");
-        this.tracker = new SqlTracker();
-        this.tracker.init();
     }
 
     @After
     public void after() {
         System.out.println("After method");
-        this.tracker = null;
+    }
+
+    public Connection init() {
+        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
+            return DriverManager.getConnection(
+                    config.getProperty("url"),
+                    config.getProperty("username"),
+                    config.getProperty("password")
+            );
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     @Test
-    public void whenAddNewItemThenTrackerHasSameItem() {
-        Item item = new Item("б");
-        Item res = this.tracker.add(item);
-        assertTrue(this.tracker.findByName(item.getName()).contains(res));
-        this.tracker.delete(item.getId());
+    public void createItem() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            tracker.add(new Item("name"));
+            assertThat(tracker.findByName("name").size(), is(1));
+        }
     }
 
     @Test
-    public void whenAddNewItemThenTrackerHasSameItemOne() {
-        Item item = new Item("test1");
-        Item itemFirst = new Item("test2");
-        this.tracker.add(item);
-        this.tracker.add(itemFirst);
-        List<Item> result = this.tracker.findByName(itemFirst.getName());
-        assertThat(result.get(0).getName(), is(itemFirst.getName()));
-        this.tracker.delete(item.getId());
-        this.tracker.delete(itemFirst.getId());
+    public void whenAddNewItemThenTrackerHasSameItemOne() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            tracker.add(new Item("test1"));
+            tracker.add(new Item("test1"));
+            assertThat(tracker.findByName("test1").size(), is(2));
+        }
     }
 
     @Test
-    public void whenAddNewItemThenTrackerHasSameItemTwo() {
-        Item item = new Item("test3");
-        Item itemFirst = new Item("test4");
-        Item itemSecond = new Item("test5");
-        Item itemThird = new Item("test6");
-        Item itemFourth = new Item("test7");
-        this.tracker.add(item);
-        this.tracker.add(itemFirst);
-        this.tracker.add(itemSecond);
-        this.tracker.add(itemThird);
-        this.tracker.add(itemFourth);
-        List<Item> result = this.tracker.findAll();
-        assertThat(result, is(this.tracker.findAll()));
-        this.tracker.delete(item.getId());
-        this.tracker.delete(itemFirst.getId());
-        this.tracker.delete(itemSecond.getId());
-        this.tracker.delete(itemThird.getId());
-        this.tracker.delete(itemFourth.getId());
+    public void whenAddNewItemThenTrackerHasSameItemTwo() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            tracker.add(new Item("test1"));
+            tracker.add(new Item("test2"));
+            tracker.add(new Item("test3"));
+            tracker.add(new Item("test4"));
+            tracker.add(new Item("test5"));
+            List<Item> result = List.of(new Item("test1"), new Item("test2"), new Item("test3"), new Item("test4"), new Item("test5"));
+            assertThat(result, is(tracker.findAll()));
+        }
     }
 
     @Test
-    public void whenReplace() {
-        Item bug = new Item("Bug");
-        this.tracker.add(bug);
-        String id = bug.getId();
-        Item bugWithDesc = new Item("Bug with description");
-        this.tracker.replace(id, bugWithDesc);
-        assertEquals(this.tracker.findById(id).getName(), id);
-        this.tracker.delete(bug.getId());
+    public void whenReplace() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            Item bug = new Item("Bug");
+            tracker.add(bug);
+            String id = bug.getId();
+            Item bugWithDesc = new Item("Bug with description");
+            tracker.replace(id, bugWithDesc);
+            assertEquals(tracker.findById(id).getName(), id);
+        }
     }
 
     @Test
-    public void whenDelete() {
-        Item bug = new Item("Bug");
-        this.tracker.add(bug);
-        String id = bug.getId();
-        this.tracker.delete(id);
-        assertThat(this.tracker.findById(id).toString(), is(nullValue()));
+    public void whenDelete() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            Item bug = new Item("Bug");
+            tracker.add(bug);
+            String id = bug.getId();
+            tracker.delete(id);
+            assertNull(tracker.findById(id).getId());
+        }
     }
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.StringJoiner;
 
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertThat;
 
 
 public class StartUITest {
+
     @Test
     public void whenExit() throws IOException, SQLException {
         StubInput input = new StubInput(new String[]{"0"});

@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;

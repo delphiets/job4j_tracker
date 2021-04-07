@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.StringJoiner;
 

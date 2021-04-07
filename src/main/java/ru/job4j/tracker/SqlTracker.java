@@ -10,12 +10,19 @@ public class SqlTracker implements Store {
 
     private Connection cn;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
     public void init() {
         Properties config = new Properties();
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
-            cn = DriverManager.getConnection(config.getProperty("url"), config.getProperty("username"), config.getProperty("password"));
+            this.cn = DriverManager.getConnection(config.getProperty("url"), config.getProperty("username"), config.getProperty("password"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -23,8 +30,8 @@ public class SqlTracker implements Store {
 
     @Override
     public void close() throws Exception {
-        if (cn != null) {
-            cn.close();
+        if (this.cn != null) {
+            this.cn.close();
         }
     }
 
