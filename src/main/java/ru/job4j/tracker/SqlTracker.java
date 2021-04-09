@@ -114,7 +114,7 @@ public class SqlTracker implements Store {
             pr.setInt(1, Integer.parseInt(id));
             try (ResultSet res = pr.executeQuery()) {
                 if (res.next()) {
-                    item = new Item(res.getString("id"));
+                    item = new Item(res.getString("id"), res.getString("name"));
                 }
             }
         } catch (SQLException se) {

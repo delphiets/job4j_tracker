@@ -13,9 +13,9 @@ public class FindByIdAction implements UserAction {
         String id = input.askStr("=== Create a new Item ====" + System.lineSeparator() + "Enter id to search for goods: ");
         Item item = store.findById(id);
         if (item != null) {
-            System.out.println("Id: " + item);
+            System.out.printf("Name: %s%s%s" + item.getName(), ". Id: ", item.getId());
         } else {
-            System.out.println("Error. Id not found");
+            System.out.println("Error. Name not found");
         }
         return true;
     }

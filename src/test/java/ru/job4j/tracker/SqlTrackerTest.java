@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class SqlTrackerTest {
@@ -79,7 +78,7 @@ public class SqlTrackerTest {
             String id = bug.getId();
             Item bugWithDesc = new Item("Bug with description");
             tracker.replace(id, bugWithDesc);
-            assertEquals(tracker.findById(id).getName(), id);
+            assertEquals(tracker.findById(id), bugWithDesc);
         }
     }
 

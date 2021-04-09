@@ -14,9 +14,9 @@ public class FindByNameAction implements UserAction {
         String name = input.askStr("=== Create a new Item ====" + System.lineSeparator() + "Enter name: ");
         List<Item> items = store.findByName(name);
         if (items.size() != 0) {
-            for (Item item: items) {
-                System.out.println("Name: " + item);
-        }
+            for (Item item : items) {
+                System.out.printf("Name: %s%s%s%s", item.getName(), ". Id: ", item.getId(), System.lineSeparator());
+            }
         } else {
             System.out.println("Name not found");
         }
